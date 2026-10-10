@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pattern - Part 1</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 24px;
+    }
+    table {
+      margin-top: 16px;
+      border-collapse: collapse;
+    }
+    td {
+      padding: 4px 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <form onsubmit="event.preventDefault(); generatePattern();">
+    <input 
+      type="number" 
+      id="rows" 
+      min="1" 
+      max="10" 
+      placeholder="Enter rows (1-10)" 
+    />
+    <button type="submit" id="btn">Generate Pattern</button>
+  </form>
+
+  <table id="pattern"></table>
+
+  <script>
+    function generatePattern() {
+      const inputEl = document.getElementById('rows');
+      const tableEl = document.getElementById('pattern');
+      const numRows = parseInt(inputEl.value, 10);
+
+      if (isNaN(numRows) || numRows < 1 || numRows > 10) {
+        return;
+      }
+
+      tableEl.innerHTML = '';
+
+      for (let i = 1; i <= numRows; i++) {
+        const tr = document.createElement('tr');
+        for (let j = 1; j <= i; j++) {
+          const td = document.createElement('td');
+          td.textContent = '*';
+          tr.appendChild(td);
+        }
+        tableEl.appendChild(tr);
+      }
+
+      inputEl.value = '';
+    }
+  </script>
+</body>
+</html>
